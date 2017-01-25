@@ -5,6 +5,7 @@ class Beacon < ApplicationRecord
   validates_uniqueness_of :name
 
 
+  scope :enabled,        ->{ where("enabled=?",true)}
   scope :by_major_minor, ->(major,minor) {where("major IN (?) AND minor IN (?)",major,minor)}
 
   def major_minor

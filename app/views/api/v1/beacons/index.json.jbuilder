@@ -11,7 +11,7 @@ json.beacons @beacons do |beacon|
     json.type coupon.content.content_type
     json.message coupon.content.message if coupon.content.content_type == "plain_text"
     json.url coupon.content.url if coupon.content.content_type == "url"
-    json.image coupon.content.image.url(:medium) if coupon.content.content_type == "image"
+    json.image asset_url(coupon.content.image.url(:medium)) if coupon.content.content_type == "image"
   end
 
 end
