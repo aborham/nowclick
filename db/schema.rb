@@ -10,35 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125060953) do
+ActiveRecord::Schema.define(version: 20170125072840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_stat_statements"
 
   create_table "beacons", force: :cascade do |t|
-    t.string  "name"
-    t.string  "description"
-    t.integer "major"
-    t.integer "minor"
-    t.string  "uuid"
-    t.boolean "enabled",     default: true, null: false
-    t.integer "coupon_id"
-  end
-
-  create_table "coupons", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.integer  "major"
+    t.integer  "minor"
+    t.string   "uuid"
+    t.boolean  "enabled",     default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
     t.integer  "content_type",       default: 0, null: false
+    t.text     "message"
     t.string   "url"
-    t.integer  "trigger",            default: 0, null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.string   "message"
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "trigger"
+    t.string   "name"
+    t.integer  "beacon_id"
+    t.integer  "content_id"
+    t.index ["beacon_id"], name: "index_coupons_on_beacon_id", using: :btree
+    t.index ["content_id"], name: "index_coupons_on_content_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -66,4 +77,6 @@ ActiveRecord::Schema.define(version: 20170125060953) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "coupons", "beacons"
+  add_foreign_key "coupons", "contents"
 end

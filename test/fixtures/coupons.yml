@@ -1,15 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
-  type: 1
-  url: MyString
-  image: 
+  beacon: one
+  content: one
+  trigger: MyString
 
 two:
-  name: MyString
-  description: MyString
-  type: 1
-  url: MyString
-  image: 
+  beacon: two
+  content: two
+  trigger: MyString
