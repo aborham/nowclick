@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125051312) do
+ActiveRecord::Schema.define(version: 20170125060953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,13 @@ ActiveRecord::Schema.define(version: 20170125051312) do
     t.integer "minor"
     t.string  "uuid"
     t.boolean "enabled",     default: true, null: false
+    t.integer "coupon_id"
   end
 
   create_table "coupons", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "type",               default: 0, null: false
+    t.integer  "content_type",       default: 0, null: false
     t.string   "url"
     t.integer  "trigger",            default: 0, null: false
     t.string   "image_file_name"
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170125051312) do
     t.datetime "image_updated_at"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "message"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170125051312) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "role_id"
+    t.string   "name"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

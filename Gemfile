@@ -31,6 +31,10 @@ gem "paperclip", "~> 5.1.0"
 
 gem 'devise'
 
+gem "cancancan"
+
+gem 'rails_admin', '~> 1.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
